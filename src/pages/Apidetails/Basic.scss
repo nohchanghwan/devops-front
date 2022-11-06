@@ -1,0 +1,43 @@
+@import '../../styles/app';
+
+//추가
+.elevation-1 thead:first-of-type {
+  background-color: Gainsboro;
+}
+.kb-table-custom {
+  table th + th { border-left:1px solid #dddddd; }
+  table td + td { border-left:1px solid #dddddd; }
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 36px;
+}
+.kb-head-custom {
+  border-top: 1px;
+  border-style: solid;
+  border-color: #dddddd;
+}
+
+.employee-list {
+  .v-card__title {
+    .v-input {
+      max-width: 45%;
+      @include media-breakpoint-up(md) {
+        max-width: 20%;
+      }
+    }
+  }  
+  .v-data-table {
+    .v-text-field > .v-input__control > .v-input__slot {
+      &:after, &:before {
+        border: none !important;
+      }
+    }
+    .v-data-table__checkbox.v-simple-checkbox {
+      .v-icon.mdi-checkbox-marked {
+        color: $primary;
+      }
+    }
+  }
+}
+
+

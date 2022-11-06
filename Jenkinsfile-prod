@@ -1,0 +1,14 @@
+node {
+    stage('checkout') {
+        checkout scm
+    }
+    stage('SSH') {
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'kcms-strapi-was-prod',
+            transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '. /var/lib/jenkins/workspace/kcms-admin-fe-CD/pm2-script-dev.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')],
+            usePromotionTimestamp: false,
+            useWorkspaceInPromotion: false,
+            verbose: true)
+        ]
+    )
+    }
+}

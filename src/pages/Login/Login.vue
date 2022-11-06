@@ -1,0 +1,207 @@
+<template>
+  <v-app>
+    <v-container fluid>
+      <v-row no-gutters>
+        <v-col cols="7" class="main-part d-none d-md-none d-lg-flex" style="background-position: bottom;">
+          <v-img src="@/assets/main.png" contain></v-img>
+          <!-- <div class="d-flex">
+            <p>KCMS 로그인화면</p>
+          </div> -->
+        </v-col>
+        <v-col cols="12" lg="5" class="login-part d-flex align-center justify-center">
+          <v-row no-gutters class="align-start">
+            <v-col cols="12" class="login-part d-flex align-center justify-center flex-column">
+              <div class="login-wrapper pt-md-4 pt-0">
+                <v-tabs grow>
+                  <v-tabs-slider></v-tabs-slider>
+                  <v-tab :href="`#tab-login`">
+                    로그인
+                  </v-tab>
+                  <v-tab :href="`#tab-newUser`">
+                    신규가입
+                  </v-tab>
+                  <v-tab-item :value="'tab-login'" >
+                    <v-form>
+                      <v-container>
+                        <v-row class="flex-column">
+                          <!-- <v-col>
+                            <p class="login-slogan display-2 text-center font-weight-medium my-10">KCMS 방문을 환영합니다</p>
+                            <v-btn height="45" block color="white" elevation="0" class="google text-capitalize">
+                              <v-img src="@/assets/google.svg" max-width="30" class="mr-4"></v-img>
+                              Sign in with Google</v-btn>
+                          </v-col> -->
+                          <v-col cols="12" class="d-flex align-center my-8">
+                            <v-divider></v-divider>
+                            <span class="px-5"> or </span>
+                            <v-divider></v-divider>
+                          </v-col>
+                          <v-form>
+                            <v-col>
+                              <v-text-field
+                                  v-model="email"
+                                  :rules="emailRules"
+                                  value="admin@flatlogic.com"
+                                  label="Email Address"
+                                  required
+                              ></v-text-field>
+                              <v-text-field
+                                  v-model="password"
+                                  :rules="passRules"
+                                  type="password"
+                                  label="Password"
+                                  hint="At least 6 characters"
+                                  required
+                              ></v-text-field>
+                            </v-col>
+                            <v-col class="d-flex justify-space-between">
+                              <v-btn
+                                  class="text-capitalize"
+                                  large
+                                  :disabled="password.length === 0 || email.length === 0"
+                                  color="primary"
+                                  @click="login"
+                              >
+                                Login</v-btn>
+                              <v-btn large text class="text-capitalize primary--text">Forget Password</v-btn>
+                            </v-col>
+                          </v-form>
+                        </v-row>
+                      </v-container>
+                    </v-form>
+                  </v-tab-item>
+                  <v-tab-item :value="'tab-newUser'" >
+                    <v-form>
+                      <v-container>
+                        <v-row class="flex-column">
+                          <v-col>
+                            <p class="login-slogan display-2 text-center font-weight-medium mt-10">Welcome!</p>
+                            <p class="login-slogan display-1 text-center font-weight-medium mb-10">Create your account</p>
+                          </v-col>
+                          <v-form>
+                            <v-col>
+                              <v-text-field
+                                  v-model="name"
+                                  label="Full Name"
+                                  required
+                              ></v-text-field>
+                              <v-text-field
+                                  v-model="password"
+                                  :rules="passRules"
+                                  type="password"
+                                  label="Password"
+                                  hint="At least 6 characters"
+                                  required
+                              ></v-text-field>
+                               <v-text-field
+                                  v-model="email"
+                                  :rules="emailRules"
+                                  label="Email Address"
+                                  required
+                              ></v-text-field>
+                               <v-text-field
+                                  v-model="username"
+                                  label="Full UserName"
+                                  required
+                              ></v-text-field>
+                            </v-col>
+                            <v-col class="d-flex justify-space-between">
+                              <v-btn
+                                  large
+                                  block
+                                  :disabled="name.length === 0 || email.length === 0 || password === 0"
+                                  color="primary"
+                                  @click="register"
+                              >
+                                Create your account</v-btn>
+                            </v-col>
+                          </v-form>
+                          <v-col cols="12" class="d-flex align-center my-4">
+                            <v-divider></v-divider>
+                            <span class="px-5"> or </span>
+                            <v-divider></v-divider>
+                          </v-col>
+                          <!-- <v-btn height="45" block color="white" elevation="0" class="google text-capitalize">
+                            <v-img src="@/assets/google.svg" max-width="30" class="mr-4"></v-img>
+                            Sign in with Google</v-btn> -->
+                        </v-row>
+                      </v-container>
+                    </v-form>
+                  </v-tab-item>
+                </v-tabs>
+              </div>
+            </v-col>
+            <v-col cols="12" class="d-flex justify-center">
+              <v-footer>
+                <div class="primary--text">© 2014-2020 <a href="https://flatlogic.com/" class="text-decoration-none">Flatlogic</a>, LLC. All rights reserved.</div>
+              </v-footer>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</template>
+
+<script>
+import { postLogin, postRegister } from '../../api/index.js'
+
+export default {
+  name: 'Login',
+  data() {
+      return {
+          name: '',
+          username : '',
+          email: '',
+          emailRules: [
+            v => !!v || 'E-mail is required',
+            v => /.+@.+/.test(v) || 'E-mail must be valid',
+          ],
+          password: '',
+          passRules: [
+            v => !!v || 'Password is required',
+            v => v.length >= 6 || 'Min 6 characters'
+          ],
+      }
+  },
+
+  methods: {
+      async login(e) {
+          e.preventDefault()
+          try {
+              const res =  await postLogin({
+                  identifier: this.email,
+                  password: this.password,
+              });
+
+              console.log(res);
+               const { jwt, user } = res.data
+              window.sessionStorage.setItem('jwt', jwt)
+              window.sessionStorage.setItem('email', res.data.user.email)
+
+              window.sessionStorage.setItem('userData', JSON.stringify(user))
+              this.$router.push('/apilist')
+          } catch(error) {
+              this.error = true
+              this.password = ''
+          }
+      },
+    async register(e) {
+      try {
+        e.preventDefault()
+        await postRegister({
+          name: this.name,
+          password: this.password,
+          email: this.email,
+          username: this.username
+        });
+        location.reload()
+        this.$router.go(0)
+      } catch (e) {
+        this.error = true
+        this.password = ''
+      }
+    },
+  }
+}
+</script>
+<style src="./Login.scss" lang="scss"/>
