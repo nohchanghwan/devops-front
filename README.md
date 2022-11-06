@@ -14,7 +14,6 @@ Lite version of a Vue Material Admin includes following features and pages:
 * Styled Vuetify components like buttons, modals, etc
 
 ## Instalation 
-
 1. Clone repository
 ```shell
 git clone https://github.com/flatlogic/material-vue.git
