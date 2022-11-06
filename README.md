@@ -9,7 +9,6 @@ Lite version of a Vue Material Admin includes following features and pages:
 
 * Vuetify
 * Responsive layout
-* Vue Apex Charts
 * Simple login / logout 
 * Error page
 * Styled Vuetify components like buttons, modals, etc
