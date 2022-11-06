@@ -14,20 +14,6 @@ Lite version of a Vue Material Admin includes following features and pages:
 * Error page
 * Styled Vuetify components like buttons, modals, etc
 
-## Pages
-We have implemented some basic pages, so you can see our template in action.
-
-* Dashboard sample
-* Typography
-* Tables
-* Notifications
-* Charts
-* Icons
-* Maps
-* Chat
-* Login
-* Error page
-
 ## Instalation 
 
 1. Clone repository
