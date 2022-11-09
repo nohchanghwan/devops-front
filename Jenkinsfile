@@ -1,7 +1,7 @@
 pipeline {
     agent any
     //npm 이슈해결을위해 설정
-    // tools {nodejs "nodejs"}
+    tools {nodejs "NODEJS"}
 
     stages {
         // stage('Checkout') {
