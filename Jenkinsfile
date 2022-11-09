@@ -8,9 +8,10 @@ pipeline {
                     url: 'https://github.com/nohchanghwan/devops-front.git'
             }
         }
-        stage('Build...') {
+        stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Test...') {
