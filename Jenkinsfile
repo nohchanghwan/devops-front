@@ -11,10 +11,15 @@ pipeline {
         //             url: 'https://github.com/nohchanghwan/devops-front.git'
         //     }
         // }
-        stage('Build') {
+        stage('NPM Build') {
             steps {
                 sh 'npm install'
                 sh 'npm run build'
+            }
+        }
+        stage('Docker Image Build') {
+            steps {
+                echo 'Docker Iamge Build..'
             }
         }
         stage('Test...') {
