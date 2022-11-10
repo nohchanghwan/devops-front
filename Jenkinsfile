@@ -4,6 +4,7 @@ pipeline {
     tools {nodejs "NODEJS"}
 
     stages {
+        // Jenkins에서 SCM 체크아웃
         // stage('Checkout') {
         //     steps {
         //         git branch: 'main',
